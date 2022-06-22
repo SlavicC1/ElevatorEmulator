@@ -1,4 +1,4 @@
-# my-project
+# elevator-emulator
 
 ## Project setup
 ```
