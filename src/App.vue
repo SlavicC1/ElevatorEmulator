@@ -29,9 +29,18 @@ export default {
     ])
   },
   methods: {
-    ...mapActions(['moveCageToNextFloor'])
+    saveAppState() {
+      this.saveState();
+    },
+    loadAppState() {
+      this.loadState();
+    },
+    ...mapActions(['moveCageToNextFloor','saveState','loadState'])
   },
   mounted() {
+    this.loadAppState();
+    window.addEventListener('beforeunload', this.saveAppState);
+
     this.moveCageToNextFloor({cageIndex: 0 });
   }
 }

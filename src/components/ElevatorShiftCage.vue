@@ -2,7 +2,7 @@
   <div 
     :class="cageClass" 
     :style="{ bottom: cageState.bottom + 'px' }">
-      <div v-if="cageState.state === 'moving'"
+      <div v-if="cageState.state != 'idle'"
         class="cage-indication">
         <div v-if="cageState.direction === 'up'">&uArr;</div>
         <div v-if="cageState.direction === 'down'">&dArr;</div>
