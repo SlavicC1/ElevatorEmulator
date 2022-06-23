@@ -10,13 +10,15 @@ const consts = {
 export default createStore({
     state() {
         return {
-            //нажата ли кнопка
+            //off - кнопка на этаже не нажата
+            //on - кнопка на этаже нажата
+            //waits - на этаж едет лифт
             floors: [
-                false,
-                false,
-                false,
-                false,
-                false,
+                {state: 'off'},
+                {state: 'off'},
+                {state: 'off'},
+                {state: 'off'},
+                {state: 'off'},
             ], 
             cages: [{
                 bottom: 0,
@@ -44,8 +46,8 @@ export default createStore({
         shiftQueue(state) {
             state.floorsQueue.shift();
         },        
-        setFloorAcivity(state, {floorNumber, isActive}) {
-            state.floors[floorNumber - 1] = isActive;
+        setFloorAcivity(state, {floorNumber, floorControlsState}) {
+            state.floors[floorNumber - 1].state = floorControlsState;
         },
         setCageFloor(state, {cageIndex, floor}) {
             state.cages[cageIndex].floor = floor;
@@ -56,7 +58,7 @@ export default createStore({
         addFloorToQueue(context, {floorNumber}) {
             let state = context.state;
             if(state.floorsQueue.includes(floorNumber)) return;
-            context.commit('setFloorAcivity', {floorNumber, isActive: true});
+            context.commit('setFloorAcivity', {floorNumber, floorControlsState: 'on'});
             context.commit('pushToQueue',{floorNumber});
         },
         
@@ -70,10 +72,11 @@ export default createStore({
             context.commit('shiftQueue');
             
             if(floorNumber === state.cages[cageIndex].floor) {
-                context.commit('setFloorAcivity', {floorNumber, isActive: false});
+                context.commit('setFloorAcivity', {floorNumber, floorControlsState: 'off'});
                 return;
             }
 
+            context.commit('setFloorAcivity', {floorNumber, floorControlsState: 'waits'});
             context.commit('setCageFloor', {cageIndex, floor: floorNumber});
 
             let newBottom = (floorNumber - 1) * consts.floorHeight;
@@ -101,7 +104,7 @@ export default createStore({
                     context.commit('setCageState', {cageIndex, cageState: 'waits'});
                     setTimeout(() => {
                         context.commit('setCageState', {cageIndex, cageState: 'idle'});
-                        context.commit('setFloorAcivity', {floorNumber, isActive: false});
+                        context.commit('setFloorAcivity', {floorNumber, floorControlsState: 'off'});
                         moveCageToNextFloor(context, {cageIndex});
                     }, consts.cageAwaitsTime);
                     clearInterval(movingCage);

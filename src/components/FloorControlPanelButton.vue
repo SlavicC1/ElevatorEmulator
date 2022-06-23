@@ -1,6 +1,5 @@
 <template>
-  <div @click="onClick"
-    :class="floors[floorNumber - 1] ? 'button active' : 'button'">
+  <div @click="onClick" :class="buttonClass">
   </div>
 </template>
 
@@ -15,22 +14,22 @@ export default {
   },
 
   computed: {
+    buttonClass() {
+      let classes = {
+        off: '', 
+        on: 'active',
+        waits: 'waits'
+      };
+      return 'button ' + classes[this.floors[this.floorNumber - 1].state];
+    },
     ...mapState(['floors'])
-  },
-
-  data() {
-    return {
-      active: false,
-    }
   },
 
   methods: {
     onClick() {
-      if(!this.active) {
-        this.active = true;
-        this.addFloorToQueue({floorNumber: this.floorNumber});
-        this.moveCageToNextFloor({cageIndex: 0});
-      }
+      if(this.floors[this.floorNumber - 1].state != 'off') return;
+      this.addFloorToQueue({floorNumber: this.floorNumber});
+      this.moveCageToNextFloor({cageIndex: 0});
     },
     ...mapActions(['addFloorToQueue','moveCageToNextFloor'])
   }
@@ -50,6 +49,10 @@ export default {
 
 .active {
   background: green;
+}
+
+.waits {
+  background: red;
 }
 
 .button:hover {
