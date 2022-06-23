@@ -18,11 +18,19 @@ export default {
     ...mapState(['floors'])
   },
 
+  data() {
+    return {
+      active: false,
+    }
+  },
+
   methods: {
     onClick() {
-      this.active = true;
-      this.addFloorToQueue({floorNumber: this.floorNumber});
-      this.moveCageToNextFloor({cageIndex: 0});
+      if(!this.active) {
+        this.active = true;
+        this.addFloorToQueue({floorNumber: this.floorNumber});
+        this.moveCageToNextFloor({cageIndex: 0});
+      }
     },
     ...mapActions(['addFloorToQueue','moveCageToNextFloor'])
   }

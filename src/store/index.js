@@ -1,6 +1,6 @@
 import {createStore} from 'vuex';
 
-export const consts = {
+const consts = {
     floorHeight: 100,
     cageSpeed: 2,
     baseUpdateTime: 20,
