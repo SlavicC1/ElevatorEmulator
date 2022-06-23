@@ -5,6 +5,7 @@
 
 <script>
 import {mapActions, mapState} from 'vuex';
+import { FLOOR_STATE } from '@/store';
 
 export default {
   name: 'FloorControlPanelButton',
@@ -15,23 +16,21 @@ export default {
 
   computed: {
     buttonClass() {
-      let classes = {
-        off: '', 
-        on: 'active',
-        waits: 'waits'
-      };
-      return 'button ' + classes[this.floors[this.floorNumber - 1].state];
+      let resultClass = 'button';
+      if(this.floors[this.floorNumber - 1].state === FLOOR_STATE.IN_QUEUE) resultClass += ' active';
+      if(this.floors[this.floorNumber - 1].state === FLOOR_STATE.WAITS_ELEVATOR) resultClass += ' waits';
+      return resultClass;
     },
     ...mapState(['floors'])
   },
 
   methods: {
     onClick() {
-      if(this.floors[this.floorNumber - 1].state != 'off') return;
+      if(this.floors[this.floorNumber - 1].state != FLOOR_STATE.IDLE) return;
       this.addFloorToQueue({floorNumber: this.floorNumber});
-      this.moveCageToNextFloor({cageIndex: 0});
+      this.cagesStartMoving();
     },
-    ...mapActions(['addFloorToQueue','moveCageToNextFloor'])
+    ...mapActions(['addFloorToQueue','cagesStartMoving'])
   }
 }
 </script>

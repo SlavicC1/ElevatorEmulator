@@ -1,10 +1,13 @@
 <template>
   <div class="app">
-    <ElevatorShift :cageState="cages[0]"/>
+    <ElevatorShift         
+      v-for="item in cages"
+      :key="item"
+      :cageState="item"/>
     <div class="controls">
       <FloorControlPanel 
         v-for="(item, index) in floors.slice().reverse()"
-        :key="index"
+        :key="item"
         :floorNumber="floors.length - index" />
     </div>
   </div>
@@ -35,13 +38,16 @@ export default {
     loadAppState() {
       this.loadState();
     },
-    ...mapActions(['moveCageToNextFloor','saveState','loadState'])
+    ...mapActions(['cagesStartMoving','saveState','loadState','setNewBasicState'])
   },
   mounted() {
+    this.setNewBasicState( {numberOfFloors: 5, numberOfCages: 1});
+
     this.loadAppState();
     window.addEventListener('beforeunload', this.saveAppState);
+    localStorage.clear();
 
-    this.moveCageToNextFloor({cageIndex: 0 });
+    this.cagesStartMoving();
   }
 }
 </script>
