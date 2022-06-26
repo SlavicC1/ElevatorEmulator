@@ -3,7 +3,7 @@
     <ElevatorShift         
       v-for="item in cages"
       :key="item"
-      :cageState="item"/>
+      :cageState="item" />
     <div class="controls">
       <FloorControlPanel 
         v-for="(item, index) in floors.slice().reverse()"

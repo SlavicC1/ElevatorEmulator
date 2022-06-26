@@ -2,17 +2,17 @@
   <div 
     :class="cageClass" 
     :style="{ bottom: cageState.bottom + 'px' }">
-      <div v-if="cageState.state != ELEVATOR_STATE.IDLE"
+      <div v-if="cageState.state != CAGE_STATE.IDLE"
         class="cage-indication">
-        <div v-if="cageState.direction === ELEVATOR_MOVING_DIRECTION.UP">&uArr;</div>
-        <div v-if="cageState.direction === ELEVATOR_MOVING_DIRECTION.DOWN">&dArr;</div>
+        <div v-if="cageState.direction === CAGE_MOVING_DIRECTION.UP">&uArr;</div>
+        <div v-if="cageState.direction === CAGE_MOVING_DIRECTION.DOWN">&dArr;</div>
         {{cageState.floor}}
       </div>
   </div>
 </template>
 
 <script>
-import { ELEVATOR_MOVING_DIRECTION, ELEVATOR_STATE } from '@/store';
+import { CAGE_MOVING_DIRECTION, CAGE_STATE } from '@/store';
 
 export default {
   name: 'ElevatorShiftCage',
@@ -23,8 +23,8 @@ export default {
 
   data() {
     return {
-      ELEVATOR_MOVING_DIRECTION,
-      ELEVATOR_STATE
+      CAGE_MOVING_DIRECTION,
+      CAGE_STATE
 
     }
   },
@@ -33,7 +33,7 @@ export default {
     cageClass() {
       let classes = [
         'cage',
-        this.cageState.state === ELEVATOR_STATE.WAITING_ON_FLOOR ? 'waiting' : ''
+        this.cageState.state === CAGE_STATE.WAITING_ON_FLOOR ? 'waiting' : ''
       ];
       return classes.join(' ');
     }

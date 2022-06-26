@@ -18,7 +18,7 @@ export default {
     buttonClass() {
       let resultClass = 'button';
       if(this.floors[this.floorNumber - 1].state === FLOOR_STATE.IN_QUEUE) resultClass += ' active';
-      if(this.floors[this.floorNumber - 1].state === FLOOR_STATE.WAITS_ELEVATOR) resultClass += ' waits';
+      if(this.floors[this.floorNumber - 1].state === FLOOR_STATE.WAITS_CAGE) resultClass += ' waits';
       return resultClass;
     },
     ...mapState(['floors'])
@@ -28,9 +28,9 @@ export default {
     onClick() {
       if(this.floors[this.floorNumber - 1].state != FLOOR_STATE.IDLE) return;
       this.addFloorToQueue({floorNumber: this.floorNumber});
-      this.cagesStartMoving();
+      this.nexIdleCageStartMoving();
     },
-    ...mapActions(['addFloorToQueue','cagesStartMoving'])
+    ...mapActions(['addFloorToQueue','nexIdleCageStartMoving'])
   }
 }
 </script>
