@@ -3,7 +3,7 @@ import {floorHeight} from '@/constants.module.scss';
 
 const consts = {
     floorHeight: parseInt(floorHeight),
-    cageSpeed: 0.1,
+    cageSpeed: parseInt(floorHeight) / 1000,
     cageAwaitsTime: 3000,
 }
 
