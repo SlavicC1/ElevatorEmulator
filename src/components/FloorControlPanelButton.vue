@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/constants.scss';
+@import '@/constants.module.scss';
 .button {
   width: $button-size;
   height: $button-size;

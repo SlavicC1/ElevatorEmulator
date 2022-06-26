@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/constants.scss';
+@import '@/constants.module.scss';
   .shift {
     width: $full-shif-width;
     position: relative;

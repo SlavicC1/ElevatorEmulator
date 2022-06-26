@@ -1,24 +1,27 @@
-# elevator-emulator
+# Эмулятор лифта
 
-## Project setup
+## Настройка проекта
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Локальный запуск
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+npm run start
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Индикация
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Индикация лифта
+* Кабина <span style="color:blue">**синего**</span> цвета - состояние "покоя"
+* с индикатором направления движения - "в движении"
+* Кабина <span style="color:red">**красного**</span> цвета - состояние "ожидания"
+
+### Индикация кнопок вызова
+* Кнопка <span style="color:blue">**синего**</span> цвета - не нажата
+* Кнопка <span style="color:red">**красного**</span> цвета - вызов обрабатывается
+* Кнопка <span style="color:green">**зеленого**</span> цвета - вызов в очереди
+
+### Файл с конфигурационными параметрами - src/constants.module.scss
+
+### [ссылка на ТЗ](https://docs.yandex.ru/docs/view?url=ya-mail%3A%2F%2F179581035141406077%2F1.4&name=%D0%A2%D0%97%20-%20%D0%AD%D0%BC%D1%83%D0%BB%D1%8F%D1%82%D0%BE%D1%80%20%D0%BB%D0%B8%D1%84%D1%82%D0%B0.docx&uid=132386136)

@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/constants.scss';
+@import '@/constants.module.scss';
   .cage {
     width: $shift-width;
     height: $floor-height;

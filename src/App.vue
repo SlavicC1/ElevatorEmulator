@@ -18,6 +18,7 @@ import {mapState, mapActions} from 'vuex';
 
 import ElevatorShift from "./components/ElevatorShift.vue";
 import FloorControlPanel from "./components/FloorControlPanel.vue";
+import {numberOfFloors, numberOfCages} from '@/constants.module.scss';
 
 export default {
   name: 'App',
@@ -41,7 +42,10 @@ export default {
     ...mapActions(['cagesStartMoving','saveState','loadState','setNewBasicState'])
   },
   mounted() {
-    this.setNewBasicState( {numberOfFloors: 5, numberOfCages: 1});
+    this.setNewBasicState( {
+      numberOfFloors: parseInt(numberOfFloors),
+      numberOfCages: parseInt(numberOfCages)
+    });
 
     this.loadAppState();
     window.addEventListener('beforeunload', this.saveAppState);

@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/constants.scss';
+@import '@/constants.module.scss';
 .floor {
   width: 100%;
   border-bottom: 1px solid grey;

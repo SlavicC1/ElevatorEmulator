@@ -1,4 +1,11 @@
 import {createStore} from 'vuex';
+import {floorHeight} from '@/constants.module.scss';
+
+const consts = {
+    floorHeight: parseInt(floorHeight),
+    cageSpeed: 0.1,
+    cageAwaitsTime: 3000,
+}
 
 export const FLOOR_STATE = {
     IDLE: 'idle',
@@ -17,14 +24,6 @@ export const CAGE_MOVING_DIRECTION = {
     UP: 'up',
     DOWN: 'down',
 };
-
-
-
-const consts = {
-    floorHeight: 100, //px
-    cageSpeed: 0.1, // px/ms
-    cageAwaitsTime: 3000,
-}
 
 export default createStore({
     state() {
